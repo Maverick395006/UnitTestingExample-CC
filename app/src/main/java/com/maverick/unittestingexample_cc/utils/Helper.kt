@@ -18,4 +18,19 @@ class Helper() {
         return result
     }
 
+    fun validatePassword(input: String) = when {
+        input.isBlank() -> {
+            "Password is required Field"
+        }
+        input.length < 6 -> {
+            "Password is too Short"
+        }
+        input.length > 15 -> {
+            "Password is too Long"
+        }
+        else -> {
+            "Valid"
+        }
+    }
+
 }
