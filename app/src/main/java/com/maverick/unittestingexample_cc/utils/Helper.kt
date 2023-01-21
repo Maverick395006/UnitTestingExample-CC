@@ -33,4 +33,21 @@ class Helper() {
         }
     }
 
+    fun reverseString(input: String?): String {
+        if (input == null) {
+            throw java.lang.IllegalArgumentException("null in test")
+        }
+        val chars = input.toCharArray()
+        var i = 0
+        var j = chars.size - 1
+        while (i < j) {
+            val temp = chars[i]
+            chars[i] = chars[j]
+            chars[j] = temp
+            i++
+            j--
+        }
+        return chars.joinToString("")
+    }
+
 }
