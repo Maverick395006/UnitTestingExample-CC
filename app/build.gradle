@@ -41,7 +41,16 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
+
+    //Unit Test [Pure java/kotlin Logic]
+    testImplementation 'junit:junit:4.12'
+
+    //InstrumentationTest [Non-UI Tests - depends on Context, Asset Manager etc.]
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+
+    //InstrumentationTest [UI Tests - Ui Interaction]
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // Gson Converter from Google
+    implementation 'com.google.code.gson:gson:2.10.1'
 }
