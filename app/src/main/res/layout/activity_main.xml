@@ -10,7 +10,6 @@
     android:paddingBottom="0dp"
     tools:context=".MainActivity">
 
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -77,27 +76,29 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
+            android:id="@+id/tvPrevious"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTint="#80FFFFFF"
             android:onClick="onPrevious"
             android:text="PREVIOUS"
             android:textColor="#80FFFFFF"
-            android:textSize="18sp"
-            app:drawableStartCompat="@drawable/ic_left_arrow" />
+            android:textSize="28sp"
+            app:drawableStartCompat="@drawable/ic_left_arrow"
+            app:drawableTint="#80FFFFFF" />
 
         <TextView
+            android:id="@+id/tvNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTint="#80FFFFFF"
             android:onClick="onNext"
             android:text="NEXT"
             android:textAlignment="textEnd"
             android:textColor="#80FFFFFF"
-            android:textSize="18sp"
-            app:drawableEndCompat="@drawable/ic_arrow" />
+            android:textSize="28sp"
+            app:drawableEndCompat="@drawable/ic_arrow"
+            app:drawableTint="#80FFFFFF" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
