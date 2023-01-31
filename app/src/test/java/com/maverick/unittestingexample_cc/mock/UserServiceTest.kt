@@ -23,6 +23,6 @@ class UserServiceTest {
     fun testUserService() {
         val sut = UserService(userRepository)
         val status = sut.loginUser("john@gmail.com", "jhvs7vsdv8v")
-        assertEquals("Invalid password",status)
+        assertEquals("Invalid Password",status)
     }
 }
