@@ -62,4 +62,7 @@ dependencies {
     // Optional -- Mockito framework
     testImplementation 'org.mockito:mockito-core:4.0.0'
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
+
+    // Coroutine testing dependency
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
 }
