@@ -2,11 +2,9 @@ package com.maverick.unittestingexample_cc
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.NetworkOnMainThreadException
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.maverick.unittestingexample_cc.adapter.ProductAdapter
 import com.maverick.unittestingexample_cc.databinding.ActivityMainBinding
 import com.maverick.unittestingexample_cc.utils.NetworkResult
