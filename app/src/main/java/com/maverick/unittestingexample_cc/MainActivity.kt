@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.maverick.unittestingexample_cc.adapter.ProductAdapter
 import com.maverick.unittestingexample_cc.databinding.ActivityMainBinding
 import com.maverick.unittestingexample_cc.utils.NetworkResult
+import com.maverick.unittestingexample_cc.utils.setVisibleOrGone
+import com.maverick.unittestingexample_cc.utils.showToast
 import com.maverick.unittestingexample_cc.viewmodels.MainViewModel
 import com.maverick.unittestingexample_cc.viewmodels.MainViewModelFactory
 
@@ -35,16 +37,21 @@ class MainActivity : AppCompatActivity() {
             when (it) {
                 is NetworkResult.Success -> {
                     Log.d("CHEEZ", it.data.toString())
-                    productAdapter = ProductAdapter(it.data!!)
+                    productAdapter = ProductAdapter(it.data)
                     binding.rvProductList.adapter = productAdapter
+                    setVisibleOrGone(binding.progressBar, false)
                 }
                 is NetworkResult.Error -> {
+                    showToast("There is Some Error", true)
+                    setVisibleOrGone(binding.progressBar, false)
 
                 }
-                is NetworkResult.Loading -> TODO()
+                is NetworkResult.Loading -> {
+                    setVisibleOrGone(binding.progressBar, true)
+                    showToast("Fetching Data From Server", true)
+                }
             }
+
         }
-
     }
-
 }

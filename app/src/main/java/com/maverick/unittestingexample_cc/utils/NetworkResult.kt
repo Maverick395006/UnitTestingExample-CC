@@ -1,9 +1,9 @@
 package com.maverick.unittestingexample_cc.utils
 
-sealed class NetworkResult<T>(val data: T? = null, val message: String? = null) {
+sealed class NetworkResult<out R> {
 
-    class Success<T>(data: T) : NetworkResult<T>(data)
-    class Error<T>(message: String?, data: T? = null) : NetworkResult<T>(data, message)
-    class Loading<T> : NetworkResult<T>()
+    data class Success<out T>(val data: T) : NetworkResult<T>()
+    data class Error(val exception: Exception) : NetworkResult<Nothing>()
+    object Loading : NetworkResult<Nothing>()
 
 }

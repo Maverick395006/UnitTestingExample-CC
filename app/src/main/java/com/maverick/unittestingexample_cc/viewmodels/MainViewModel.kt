@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.maverick.unittestingexample_cc.models.ProductListItem
 import com.maverick.unittestingexample_cc.repository.ProductRepository
 import com.maverick.unittestingexample_cc.utils.NetworkResult
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: ProductRepository) : ViewModel() {
@@ -17,8 +19,9 @@ class MainViewModel(private val repository: ProductRepository) : ViewModel() {
 
     fun getProducts() {
         viewModelScope.launch {
-            val result = repository.getProducts()
-            _product.postValue(result)
+            repository.getProducts().onEach { dataState ->
+                _product.value = dataState
+            }.launchIn(viewModelScope)
         }
     }
 
