@@ -2,9 +2,11 @@ package com.maverick.unittestingexample_cc.utils
 
 import android.content.Context
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.google.android.material.progressindicator.LinearProgressIndicator
 
 fun Context.showToast(toastMessage: String, isLong: Boolean) {
@@ -25,5 +27,10 @@ fun setVisibleOrInvisible(view: View, condition: Boolean) {
 fun goneWhenEmpty(textView: TextView, goneWhenEmpty: Boolean) {
     textView.visibility =
         if (textView.text.isNullOrEmpty() && goneWhenEmpty) View.GONE else View.VISIBLE
+}
+
+@BindingAdapter("imageFromUrl")
+fun ImageView.setImageFromUrl(url:String) {
+    Glide.with(this).load(url).into(this)
 }
 

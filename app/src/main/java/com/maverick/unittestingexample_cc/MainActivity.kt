@@ -37,8 +37,9 @@ class MainActivity : AppCompatActivity() {
             when (it) {
                 is NetworkResult.Success -> {
                     Log.d("CHEEZ", it.data.toString())
-                    productAdapter = ProductAdapter(it.data)
+                    productAdapter = ProductAdapter()
                     binding.rvProductList.adapter = productAdapter
+                    productAdapter.addAll(it.data)
                     setVisibleOrGone(binding.progressBar, false)
                 }
                 is NetworkResult.Error -> {

@@ -1,36 +1,66 @@
 package com.maverick.unittestingexample_cc.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.maverick.unittestingexample_cc.R
+import com.maverick.unittestingexample_cc.databinding.ProductItemLayoutBinding
 import com.maverick.unittestingexample_cc.models.ProductListItem
+import com.maverick.unittestingexample_cc.utils.setImageFromUrl
 
-class ProductAdapter(private val productList: List<ProductListItem>) :
+class ProductAdapter() :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
+    private var productList = mutableListOf<ProductListItem>()
+
+    interface EventListener {
+        fun onItemClick(position: Int, item: ProductListItem)
+    }
+
+    private lateinit var mEventListener: EventListener
+
+    fun setEventListener(eventListener: EventListener) {
+        mEventListener = eventListener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.product_item_layout, parent, false)
-        return ProductViewHolder(view)
+
+        val inflater = LayoutInflater.from(parent.context)
+        val itemBinding = DataBindingUtil.inflate<ProductItemLayoutBinding>(
+            inflater,
+            R.layout.product_item_layout,
+            parent,
+            false
+        )
+        return ProductViewHolder(itemBinding)
+
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        val currentProduct = productList[position]
-        holder.name.text = currentProduct.title
-        Glide.with(holder.image.context).load(currentProduct.image).into(holder.image)
+        val currentItem = productList[position]
+        try {
+            holder.itemBinding.productName.text = currentItem.title
+            holder.itemBinding.productImage.setImageFromUrl(currentItem.image!!)
+
+            holder.itemBinding.root.setOnClickListener {
+                mEventListener.onItemClick(position, currentItem)
+            }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
-    override fun getItemCount(): Int {
-        return productList.size
+    override fun getItemCount(): Int = productList.size
+
+    fun addAll(mData: List<ProductListItem>?) {
+        productList.clear()
+        productList.addAll(mData!!)
+        notifyDataSetChanged()
     }
 
-    class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val image = itemView.findViewById<ImageView>(R.id.productImage)
-        val name = itemView.findViewById<TextView>(R.id.productName)
-    }
+    inner class ProductViewHolder(internal var itemBinding: ProductItemLayoutBinding) :
+        RecyclerView.ViewHolder(itemBinding.root)
+
 }
