@@ -1,9 +1,9 @@
-package com.maverick.unittestingexample_cc.models
+package com.maverick.unittestingexample_cc.api
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class ProductListItem (
+data class ProductRemote(
 
     @SerializedName("title")
     @Expose

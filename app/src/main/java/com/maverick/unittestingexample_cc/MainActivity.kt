@@ -3,10 +3,12 @@ package com.maverick.unittestingexample_cc
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.maverick.unittestingexample_cc.adapter.ProductAdapter
 import com.maverick.unittestingexample_cc.databinding.ActivityMainBinding
+import com.maverick.unittestingexample_cc.models.Product
 import com.maverick.unittestingexample_cc.utils.NetworkResult
 import com.maverick.unittestingexample_cc.utils.setVisibleOrGone
 import com.maverick.unittestingexample_cc.utils.showToast
@@ -40,12 +42,16 @@ class MainActivity : AppCompatActivity() {
                     productAdapter = ProductAdapter()
                     binding.rvProductList.adapter = productAdapter
                     productAdapter.addAll(it.data)
+                    productAdapter.setEventListener(object : ProductAdapter.EventListener {
+                        override fun onItemClick(position: Int, item: Product) {
+                            showToast(item.name, false)
+                        }
+                    })
                     setVisibleOrGone(binding.progressBar, false)
                 }
                 is NetworkResult.Error -> {
                     showToast("There is Some Error", true)
                     setVisibleOrGone(binding.progressBar, false)
-
                 }
                 is NetworkResult.Loading -> {
                     setVisibleOrGone(binding.progressBar, true)

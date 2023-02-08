@@ -6,16 +6,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.maverick.unittestingexample_cc.R
 import com.maverick.unittestingexample_cc.databinding.ProductItemLayoutBinding
-import com.maverick.unittestingexample_cc.models.ProductListItem
+import com.maverick.unittestingexample_cc.models.Product
 import com.maverick.unittestingexample_cc.utils.setImageFromUrl
 
 class ProductAdapter() :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
-    private var productList = mutableListOf<ProductListItem>()
+    private var productList = mutableListOf<Product>()
 
     interface EventListener {
-        fun onItemClick(position: Int, item: ProductListItem)
+        fun onItemClick(position: Int, item: Product)
     }
 
     private lateinit var mEventListener: EventListener
@@ -40,8 +40,8 @@ class ProductAdapter() :
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val currentItem = productList[position]
         try {
-            holder.itemBinding.productName.text = currentItem.title
-            holder.itemBinding.productImage.setImageFromUrl(currentItem.image!!)
+            holder.itemBinding.productName.text = currentItem.name
+            holder.itemBinding.productImage.setImageFromUrl(currentItem.image)
 
             holder.itemBinding.root.setOnClickListener {
                 mEventListener.onItemClick(position, currentItem)
@@ -54,7 +54,7 @@ class ProductAdapter() :
 
     override fun getItemCount(): Int = productList.size
 
-    fun addAll(mData: List<ProductListItem>?) {
+    fun addAll(mData: List<Product>?) {
         productList.clear()
         productList.addAll(mData!!)
         notifyDataSetChanged()
