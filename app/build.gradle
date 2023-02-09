@@ -35,6 +35,17 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    // setup sharedTest between unitTest and instrumentationTest
+    sourceSets {
+        androidTest{
+            java.srcDirs += "src/sharedTest/java"
+        }
+        test{
+            java.srcDirs += "src/sharedTest/java"
+        }
+    }
+
 }
 
 dependencies {
