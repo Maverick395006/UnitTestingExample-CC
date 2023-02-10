@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "Test Product",
+    "Price": 210.50,
+    "description": "Test Description",
+    "category": "men's clothing",
+    "image": "https://fakestoreapi.com/img/81fPKd.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Mens T-Shirts",
+    "Price": 25.30,
+    "description": "Three-button t shirt.",
+    "category": "men's clothing",
+    "image": "https://fakestoreapi.com/img/71li.jpg"
+  }
+]
